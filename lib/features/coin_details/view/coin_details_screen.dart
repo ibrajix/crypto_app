@@ -14,8 +14,6 @@ class CoinDetailsScreen extends ConsumerStatefulWidget {
 }
 
 class _CoinDetailsScreenState extends ConsumerState<CoinDetailsScreen> {
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     final isDarkMode = ref.watch(themeProvider) == ThemeMode.dark;

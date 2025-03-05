@@ -3,6 +3,7 @@ import 'package:crypto_app/constants/images.dart';
 import 'package:crypto_app/features/coin_details/components/app_loader.dart';
 import 'package:crypto_app/features/coin_details/widgets/chart_orderbook_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -53,7 +54,17 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
           _buildBuySellSection()
         ],
       ),
-    );
+    )
+        .animate()
+        .fadeIn(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+        )
+        .slideY(
+          begin: 0.1,
+          end: 0,
+          duration: const Duration(milliseconds: 500),
+        );
   }
 
   Widget _buildPriceInfo(WebSocketState state) {
@@ -85,7 +96,16 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
                   AppImages.btcUsdt,
                   width: 44,
                   height: 24,
-                ),
+                )
+                    .animate()
+                    .fadeIn(
+                      duration: const Duration(milliseconds: 500),
+                    )
+                    .scaleXY(
+                      begin: 0.8,
+                      end: 1,
+                      duration: const Duration(milliseconds: 500),
+                    ),
                 const SizedBox(width: 8),
                 InkWell(
                   onTap: () {},
@@ -103,10 +123,28 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
                       ),
                     ],
                   ),
-                ),
+                )
+                    .animate()
+                    .fadeIn(
+                      delay: const Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 500),
+                    )
+                    .slideX(
+                      begin: -0.1,
+                      end: 0,
+                      duration: const Duration(milliseconds: 500),
+                    ),
                 const SizedBox(width: 18),
                 Text('\$${closePrice.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 18, color: mainGreen)),
+                        style: const TextStyle(fontSize: 18, color: mainGreen))
+                    .animate()
+                    .fadeIn(
+                      delay: const Duration(milliseconds: 400),
+                      duration: const Duration(milliseconds: 500),
+                    )
+                    .shimmer(
+                      duration: const Duration(milliseconds: 800),
+                    ),
               ],
             ),
             const SizedBox(height: 14),
@@ -143,6 +181,18 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
                   ),
                 ],
               ),
+            ).animate(
+              effects: [
+                FadeEffect(
+                  delay: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 500),
+                ),
+                SlideEffect(
+                  begin: const Offset(0.1, 0),
+                  end: Offset.zero,
+                  duration: const Duration(milliseconds: 500),
+                ),
+              ],
             ),
           ],
         ),
@@ -186,35 +236,46 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
     return Column(
       children: [
         Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: isDarkMode ? cardColorDark : white,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: isDarkMode ? cardColorDark : white,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: AppButton(
+                  title: 'Buy',
+                  onPressed: () {
+                    openBottomSheet(context, OrderMode.buy);
+                  },
+                  color: mainGreen,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: AppButton(
+                  title: 'Sell',
+                  onPressed: () {
+                    openBottomSheet(context, OrderMode.sell);
+                  },
+                  color: mainRed,
+                ),
+              ),
+            ],
+          ),
+        )
+            .animate()
+            .fadeIn(
+              delay: const Duration(milliseconds: 800),
+              duration: const Duration(milliseconds: 500),
+            )
+            .scaleXY(
+              begin: 0.9,
+              end: 1,
+              duration: const Duration(milliseconds: 500),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: AppButton(
-                    title: 'Buy',
-                    onPressed: () {
-                      openBottomSheet(context, OrderMode.buy);
-                    },
-                    color: mainGreen,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: AppButton(
-                    title: 'Sell',
-                    onPressed: () {
-                      openBottomSheet(context, OrderMode.sell);
-                    },
-                    color: mainRed,
-                  ),
-                ),
-              ],
-            )),
       ],
     );
   }
@@ -269,78 +330,83 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
               ),
             ),
           ),
-        ),
-        Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: isDarkMode ? cardColorDark : white,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+        )
+            .animate()
+            .fadeIn(
+              delay: const Duration(milliseconds: 700),
+              duration: const Duration(milliseconds: 500),
+            )
+            .slideY(
+              begin: 0.1,
+              end: 0,
+              duration: const Duration(milliseconds: 500),
             ),
-            child: SizedBox(
-              height: 400,
-              child: TabBarView(controller: _tabController, children: const [
-                Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "No Open Orders",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                )),
-                Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "No Open Positions",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                )),
-                Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "No Order History",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                )),
-              ]),
-            )),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: isDarkMode ? cardColorDark : white,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          child: SizedBox(
+            height: 400,
+            child: TabBarView(controller: _tabController, children: const [
+              Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "No Open Orders",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              )),
+              Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "No Open Positions",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              )),
+              Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "No Order History",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              )),
+            ]),
+          ),
+        ),
       ],
     );
   }
