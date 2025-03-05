@@ -85,98 +85,15 @@ class _ChartsOrderbookWidgetState extends ConsumerState<ChartsOrderbookWidget>
               ),
             ),
 
-            // Timeframe Section
-            TimeframeSection(
-              onSelected: (timeframe) {
-                ref.read(chartDataProvider.notifier).updateTimeframe(timeframe);
-              },
-            ),
-
-            const SizedBox(height: 12),
-            const Divider(color: divider, thickness: 0.1),
-            Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      _selectedView = 'Trading view';
-                    });
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 3,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 6,
-                      horizontal: 13,
-                    ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: _selectedView == "Trading view"
-                            ? isDarkMode
-                                ? greyShade3
-                                : whiteShade2
-                            : Colors.transparent // Highlight color
-                        ),
-                    child: Center(
-                      child: Text(
-                        'Trading view',
-                        style: TextStyle(
-                            fontSize: 14, color: isDarkMode ? white : greyBg),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      _selectedView = 'Depth';
-                    });
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 3,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 6,
-                      horizontal: 13,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: _selectedView == 'Depth'
-                          ? isDarkMode
-                              ? greyShade3
-                              : whiteShade2 // Highlight color
-                          : Colors.transparent,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Depth',
-                        style: TextStyle(
-                            fontSize: 14, color: isDarkMode ? white : greyBg),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 5),
-                SvgPicture.asset(
-                  AppImages.expand,
-                ),
-              ],
-            ),
-
             // Chart/Orderbook/Trades Content
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: isDarkMode ? cardColorDark : white,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: SizedBox(
-                height: 300,
+                height: 400,
                 child: TabBarView(
                   controller: _tabController,
                   children: [
@@ -208,133 +125,221 @@ class _ChartsOrderbookWidgetState extends ConsumerState<ChartsOrderbookWidget>
                         final latestCandle =
                             candles.isNotEmpty ? candles.last : null;
 
-                        return Candlesticks(
-                          key: Key(chartState.symbol + chartState.interval),
-                          candles: candles,
-                          onLoadMoreCandles: () async {},
-                          actions: [
-                            ToolBarAction(
-                              width: 20,
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: SvgPicture.asset(
-                                  AppImages.arrowDown,
-                                  width: 25,
-                                  height: 25,
-                                ),
-                              ),
+                        return Column(
+                          children: [
+                            TimeframeSection(
+                              onSelected: (timeframe) {
+                                ref
+                                    .read(chartDataProvider.notifier)
+                                    .updateTimeframe(timeframe);
+                              },
                             ),
-                            // Symbol and OHLC action
-                            ToolBarAction(
-                              width: 250,
-                              onPressed: () {},
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 2),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        chartState.symbol,
-                                        style: const TextStyle(
-                                          fontSize: 9,
-                                          color: blackShade,
+                            const SizedBox(height: 12),
+                            const Divider(color: divider, thickness: 0.1),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedView = 'Trading view';
+                                    });
+                                  },
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 400),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6, horizontal: 13),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: _selectedView == "Trading view"
+                                          ? isDarkMode
+                                              ? greyShade3
+                                              : whiteShade2
+                                          : Colors.transparent,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Trading view',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: isDarkMode ? white : greyBg,
                                         ),
                                       ),
-                                      const SizedBox(width: 10),
-                                      if (latestCandle != null) ...[
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              const TextSpan(
-                                                text: 'O ',
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        blackShade), // Grey for O
-                                              ),
-                                              TextSpan(
-                                                text: latestCandle.open
-                                                    .toStringAsFixed(2),
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        mainGreen), // Green for value
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              const TextSpan(
-                                                text: 'H ',
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        blackShade), // Grey for H
-                                              ),
-                                              TextSpan(
-                                                text: latestCandle.high
-                                                    .toStringAsFixed(2),
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        mainGreen), // Green for value
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              const TextSpan(
-                                                text: 'L ',
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        blackShade), // Grey for L
-                                              ),
-                                              TextSpan(
-                                                text: latestCandle.low
-                                                    .toStringAsFixed(2),
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        mainGreen), // Green for value
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              const TextSpan(
-                                                text: 'C ',
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        blackShade), // Grey for C
-                                              ),
-                                              TextSpan(
-                                                text: latestCandle.close
-                                                    .toStringAsFixed(2),
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    color:
-                                                        mainGreen), // Green for value
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ],
+                                    ),
                                   ),
                                 ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedView = 'Depth';
+                                    });
+                                  },
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 400),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6, horizontal: 13),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: _selectedView == 'Depth'
+                                          ? isDarkMode
+                                              ? greyShade3
+                                              : whiteShade2
+                                          : Colors.transparent,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Depth',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: isDarkMode ? white : greyBg,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                SvgPicture.asset(
+                                  AppImages.expand,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: Candlesticks(
+                                key: Key(
+                                    chartState.symbol + chartState.interval),
+                                candles: candles,
+                                onLoadMoreCandles: () async {},
+                                actions: [
+                                  ToolBarAction(
+                                    width: 20,
+                                    onPressed: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: SvgPicture.asset(
+                                        AppImages.arrowDown,
+                                        width: 25,
+                                        height: 25,
+                                      ),
+                                    ),
+                                  ),
+                                  // Symbol and OHLC action
+                                  ToolBarAction(
+                                    width: 250,
+                                    onPressed: () {},
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 2),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              chartState.symbol,
+                                              style: const TextStyle(
+                                                fontSize: 9,
+                                                color: blackShade,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            if (latestCandle != null) ...[
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    const TextSpan(
+                                                      text: 'O ',
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: blackShade,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: latestCandle.open
+                                                          .toStringAsFixed(2),
+                                                      style: const TextStyle(
+                                                        fontSize: 10,
+                                                        color: mainGreen,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    const TextSpan(
+                                                      text: 'H ',
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: blackShade,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: latestCandle.high
+                                                          .toStringAsFixed(2),
+                                                      style: const TextStyle(
+                                                        fontSize: 10,
+                                                        color: mainGreen,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    const TextSpan(
+                                                      text: 'L ',
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: blackShade,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: latestCandle.low
+                                                          .toStringAsFixed(2),
+                                                      style: const TextStyle(
+                                                        fontSize: 10,
+                                                        color: mainGreen,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    const TextSpan(
+                                                      text: 'C ',
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: blackShade,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: latestCandle.close
+                                                          .toStringAsFixed(2),
+                                                      style: const TextStyle(
+                                                        fontSize: 10,
+                                                        color: mainGreen,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
