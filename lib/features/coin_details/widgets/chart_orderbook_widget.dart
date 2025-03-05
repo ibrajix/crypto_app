@@ -1,5 +1,6 @@
 import 'package:candlesticks/candlesticks.dart';
 import 'package:crypto_app/constants/colors.dart';
+import 'package:crypto_app/features/coin_details/components/app_loader.dart';
 import 'package:crypto_app/features/coin_details/widgets/order_book_widget.dart';
 import 'package:crypto_app/features/coin_details/widgets/time_frame_section.dart';
 import 'package:flutter/material.dart';
@@ -104,9 +105,7 @@ class _ChartsOrderbookWidgetState extends ConsumerState<ChartsOrderbookWidget>
                       builder: (context) {
                         if (chartState.isLoading) {
                           return const Center(
-                            child: CircularProgressIndicator(
-                              color: mainGreen,
-                            ),
+                            child: AppLoader(),
                           );
                         }
 

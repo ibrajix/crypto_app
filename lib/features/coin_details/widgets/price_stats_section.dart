@@ -1,5 +1,6 @@
 import 'package:crypto_app/constants/colors.dart';
 import 'package:crypto_app/constants/images.dart';
+import 'package:crypto_app/features/coin_details/components/app_loader.dart';
 import 'package:crypto_app/features/coin_details/widgets/chart_orderbook_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,7 +60,7 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
     final isDarkMode = ref.watch(themeProvider) == ThemeMode.dark;
 
     if (state.candlestickData == null) {
-      return const Center(child: CircularProgressIndicator(color: black));
+      return const Center(child: AppLoader());
     }
 
     final candleData = state.candlestickData['k'];
