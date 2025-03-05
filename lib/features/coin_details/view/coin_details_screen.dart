@@ -1,3 +1,4 @@
+import 'package:crypto_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,9 +18,10 @@ class _CoinDetailsScreenState extends ConsumerState<CoinDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = ref.watch(themeProvider);
+    final isDarkMode = ref.watch(themeProvider) == ThemeMode.dark;
 
     return Scaffold(
+        backgroundColor: isDarkMode ? greyBg : whiteShade2,
         resizeToAvoidBottomInset: true,
         endDrawer: _buildEndDrawer(context),
         appBar: const PreferredSize(
