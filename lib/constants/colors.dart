@@ -13,3 +13,4 @@ const greyShade = Color(0xffCFD3D8);
 const greyShade2 = Color(0xff555C63);
 const cardColorDark = Color(0xff17181B);
 const divider = Color(0xff737A91);
+const greyShade3 = Color(0xff353945);

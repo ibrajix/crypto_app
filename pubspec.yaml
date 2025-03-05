@@ -43,6 +43,7 @@ dependencies:
   flutter_riverpod: ^2.4.9
   flutter_svg: ^2.0.9
   web_socket_channel: ^3.0.2
+  syncfusion_flutter_charts: ^28.2.9
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ dev_dependencies:
   freezed: ^2.4.6
   build_runner: ^2.4.13
   json_serializable: ^6.7.1
+  candlesticks: ^2.1.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

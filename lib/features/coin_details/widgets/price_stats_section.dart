@@ -40,7 +40,6 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection> {
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildPriceInfo(webSocketState),
-          const SizedBox(height: 24),
           const ChartsOrderbookWidget(),
         ],
       ),
@@ -165,7 +164,7 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection> {
           const SizedBox(height: 4),
           Text(
             value,
-            style: TextStyle(color: color, fontSize: 14),
+            style: TextStyle(color: color, fontSize: 12),
           ),
         ],
       ),

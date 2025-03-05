@@ -136,7 +136,7 @@ class TimeframeSection extends ConsumerWidget {
 
   Widget _buildVerticalDivider() {
     return Container(
-      width: 10,
+      width: 1,
       height: 25,
       color: divider.withOpacity(.08),
     );

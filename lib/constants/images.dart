@@ -14,6 +14,8 @@ abstract class AppImages {
   static const lineDown = "$svgImage/line_down.svg";
   static const caretDown = "$svgImage/caret_down.svg";
   static const chart = "$svgImage/chart.svg";
+  static const expand = "$svgImage/expand.svg";
+  static const arrowDown = "$svgImage/arrow_down.svg";
 
   //OTHERS
   static const user = "$otherImage/user.png";
