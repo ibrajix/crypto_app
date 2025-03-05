@@ -38,14 +38,13 @@ dependencies:
   cupertino_icons: ^1.0.8
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
-  dartz: ^0.10.1
   dio: ^5.4.0
   flutter_riverpod: ^2.4.9
   flutter_svg: ^2.0.9
   web_socket_channel: ^3.0.2
-  syncfusion_flutter_charts: ^28.2.9
   rxdart: ^0.28.0
   flutter_animate: ^4.5.2
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
