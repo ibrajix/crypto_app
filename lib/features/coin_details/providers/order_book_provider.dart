@@ -15,7 +15,6 @@ class OrderbookNotifier extends StateNotifier<List<OrderbookEntry>> {
   WebSocketChannel? _channel;
 
   OrderbookNotifier(this._repository) : super([]) {
-    // Default to BTC/USDT symbol, adjust as needed
     connectToOrderbook('BTCUSDT');
   }
 
