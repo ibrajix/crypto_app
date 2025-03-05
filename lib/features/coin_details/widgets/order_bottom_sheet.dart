@@ -32,6 +32,11 @@ class OrderBottomSheet extends ConsumerWidget {
     // Dynamically set initial selected value based on order mode
     final initialSelectedValue = orderMode == OrderMode.buy ? 0 : 1;
 
+    String getButtonText() {
+      final isSelectedTabBuy = state.selectedValue == 0;
+      return isSelectedTabBuy ? 'Buy BTC' : 'Sell BTC';
+    }
+
     return SingleChildScrollView(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -187,7 +192,7 @@ class OrderBottomSheet extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(28),
                   ),
                   child: Text(
-                    state.selectedValue == 0 ? 'Buy BTC' : 'Sell BTC',
+                    getButtonText(),
                     style: const TextStyle(color: Colors.white),
                   ),
                   onPressed: () {},

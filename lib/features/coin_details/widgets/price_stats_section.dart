@@ -298,8 +298,46 @@ class _PriceStatsSectionState extends ConsumerState<PriceStatsSection>
                     )
                   ],
                 )),
-                Text("No Open Orders"),
-                Text("No Open Orders"),
+                Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "No Open Positions",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.center,
+                    )
+                  ],
+                )),
+                Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "No Order History",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.center,
+                    )
+                  ],
+                )),
               ]),
             )),
       ],

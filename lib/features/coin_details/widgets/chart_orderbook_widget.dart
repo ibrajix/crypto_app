@@ -1,5 +1,6 @@
 import 'package:candlesticks/candlesticks.dart';
 import 'package:crypto_app/constants/colors.dart';
+import 'package:crypto_app/features/coin_details/widgets/order_book_widget.dart';
 import 'package:crypto_app/features/coin_details/widgets/time_frame_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,8 @@ class _ChartsOrderbookWidgetState extends ConsumerState<ChartsOrderbookWidget>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _selectedView = 'Trading view';
+  ValueNotifier<String> currentTime = ValueNotifier('1m');
+  Candle? candlestick;
 
   @override
   void initState() {
@@ -346,8 +349,27 @@ class _ChartsOrderbookWidgetState extends ConsumerState<ChartsOrderbookWidget>
                         );
                       },
                     ),
-                    const Text("Orderbook Content Here"),
-                    const Text("Recent Trades Content"),
+                    const Orderbook(),
+                    const Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "No Recent Trades",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          "Lorem ipsum dolor sit amet, consectetur\n adipiscing elit. Id pulvinar nullam sit imperdiet pulvinar.",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    )),
                   ],
                 ),
               ),

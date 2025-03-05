@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^2.0.9
   web_socket_channel: ^3.0.2
   syncfusion_flutter_charts: ^28.2.9
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:

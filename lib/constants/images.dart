@@ -16,6 +16,9 @@ abstract class AppImages {
   static const chart = "$svgImage/chart.svg";
   static const expand = "$svgImage/expand.svg";
   static const arrowDown = "$svgImage/arrow_down.svg";
+  static const select1 = "$svgImage/select1.svg";
+  static const select2 = "$svgImage/select2.svg";
+  static const select3 = "$svgImage/select3.svg";
 
   //OTHERS
   static const user = "$otherImage/user.png";
