@@ -8,6 +8,10 @@ abstract class AppImages {
   static const globe = "$svgImage/globe.svg";
   static const menu = "$svgImage/menu.svg";
   static const iconSearch = "$svgImage/icon_search.svg";
+  static const btcUsdt = "$svgImage/btc_usdt.svg";
+  static const clock = "$svgImage/clock.svg";
+  static const lineUp = "$svgImage/line_up.svg";
+  static const lineDown = "$svgImage/line_down.svg";
 
   //OTHERS
   static const user = "$otherImage/user.png";

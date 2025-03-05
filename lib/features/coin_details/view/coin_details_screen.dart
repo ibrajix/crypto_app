@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../theme/theme_provider.dart';
 import '../widgets/home_header.dart';
+import '../widgets/price_stats_section.dart';
 
 class CoinDetailsScreen extends ConsumerStatefulWidget {
   const CoinDetailsScreen({super.key});
@@ -19,17 +20,19 @@ class _CoinDetailsScreenState extends ConsumerState<CoinDetailsScreen> {
     final themeMode = ref.watch(themeProvider);
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      endDrawer: _buildEndDrawer(context),
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(66),
-        child: Header(),
-      ),
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [],
-      ),
-    );
+        resizeToAvoidBottomInset: true,
+        endDrawer: _buildEndDrawer(context),
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(66),
+          child: Header(),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.only(bottom: 100),
+          children: const [
+            SizedBox(height: 8),
+            PriceStatsSection(),
+          ],
+        ));
   }
 }
 
